@@ -31,21 +31,23 @@ const { Content } = await render(service);
   faqs={faqs}
 >
   <!-- HERO -->
-  <section class="relative py-28 lg:py-36 overflow-hidden" style={`background: var(--color-secondary);`}>
+  <section class="relative py-28 lg:py-36 overflow-hidden" style="background: var(--color-secondary);">
     {heroImage && (
       <div class="absolute inset-0">
-        <img src={heroImage} alt={heroAlt} class="w-full h-full object-cover opacity-20" width="1920" height="1080" fetchpriority="high" />
+        <img src={heroImage} alt={heroAlt} class="w-full h-full object-cover" width="1920" height="1080" fetchpriority="high" />
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.82) 50%, rgba(15,23,42,0.78) 100%);"></div>
       </div>
     )}
+    <div class="absolute inset-0 grid-pattern-dark" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <nav class="mb-6 text-sm" style="color: var(--color-text-on-dark-muted);">
+      <nav class="mb-6 text-sm flex items-center gap-2" style="color: var(--color-text-on-dark-muted);">
         <a href="/" class="hover:text-white transition-colors">Home</a>
-        <span class="mx-2">/</span>
+        <svg class="w-3.5 h-3.5 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
         <a href="/services" class="hover:text-white transition-colors">Services</a>
-        <span class="mx-2">/</span>
+        <svg class="w-3.5 h-3.5 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
         <span style="color: var(--color-text-on-dark);">{title}</span>
       </nav>
-      <h1 class="text-4xl sm:text-5xl font-bold mb-6" style="font-family: var(--font-family-display); color: var(--color-text-on-dark);">
+      <h1 class="text-4xl sm:text-5xl font-bold mb-6" style="font-family: var(--font-family-display); color: var(--color-text-on-dark); letter-spacing: -0.025em;">
         {title}
       </h1>
       <p class="text-lg max-w-2xl" style="color: var(--color-text-on-dark-muted);">
@@ -68,20 +70,26 @@ const { Content } = await render(service);
 
   <!-- FAQS -->
   {faqs && faqs.length > 0 && (
-    <section class="py-16 lg:py-24" style="background: var(--color-bg-alt);">
+    <section class="py-16 lg:py-24 grid-pattern" style="background: var(--color-bg-alt);">
       <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <p class="section-label mb-3">FAQ</p>
-        <h2 class="text-3xl font-bold mb-10" style="font-family: var(--font-family-display);">
+        <p class="section-label mb-4">FAQ</p>
+        <h2 class="text-3xl font-bold mb-10" style="font-family: var(--font-family-display); letter-spacing: -0.02em;">
           Common Questions About {title}
         </h2>
-        <div class="space-y-6">
+        <div class="space-y-4">
           {faqs.map((faq) => (
-            <details class="group p-6 rounded-lg" style="background: var(--color-surface); box-shadow: var(--shadow-card);">
-              <summary class="cursor-pointer font-bold text-lg flex items-center justify-between">
+            <details class="group rounded-xl overflow-hidden" style="background: var(--color-surface); border: 1px solid var(--color-border);">
+              <summary class="cursor-pointer font-bold text-base px-6 py-5 flex items-center justify-between gap-4 select-none">
                 {faq.question}
-                <span class="ml-4 text-2xl group-open:rotate-45 transition-transform" style="color: var(--color-primary);">+</span>
+                <span class="ml-4 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 group-open:rotate-45" style="background: rgba(37,99,235,0.1); color: var(--color-primary);">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </span>
               </summary>
-              <p class="mt-4 text-sm leading-relaxed" style="color: var(--color-text-muted);">{faq.answer}</p>
+              <div class="px-6 pb-5 -mt-1">
+                <p class="text-sm leading-relaxed" style="color: var(--color-text-muted);">{faq.answer}</p>
+              </div>
             </details>
           ))}
         </div>
@@ -90,16 +98,17 @@ const { Content } = await render(service);
   )}
 
   <!-- CTA -->
-  <section class="py-16 text-center" style={`background: var(--color-dark);`}>
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold mb-4" style="font-family: var(--font-family-display); color: var(--color-text-on-dark);">
+  <section class="relative py-20 text-center overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary) 60%, var(--color-dark) 100%);">
+    <div class="absolute inset-0 circuit-pattern opacity-40" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4 reveal" style="font-family: var(--font-family-display); color: var(--color-text-on-dark); letter-spacing: -0.02em;">
         Ready to Get Started?
       </h2>
-      <p class="mb-8" style="color: var(--color-text-on-dark-muted);">
+      <p class="mb-8 reveal" style="color: var(--color-text-on-dark-muted);">
         Contact us today for a free consultation about {title.toLowerCase()}.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={cta.primary.href} class="btn-primary">{cta.primary.label}</a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+        <a href={cta.primary.href} class="btn-primary">Connect With Our Team</a>
         <a href={`tel:${contact.phoneRaw}`} class="btn-ghost">{cta.phone.label}</a>
       </div>
     </div>

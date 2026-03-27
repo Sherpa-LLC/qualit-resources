@@ -15,33 +15,46 @@ const services = allServices.sort((a, b) => a.data.order - b.data.order);
   breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }]}
 >
   <!-- HERO -->
-  <section class="py-20 lg:py-28" style={`background: var(--color-secondary);`}>
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-      <p class="section-label mb-4">Our Services</p>
-      <h1 class="text-4xl sm:text-5xl font-bold mb-6" style="font-family: var(--font-family-display); color: var(--color-text-on-dark);">
+  <section class="relative py-20 lg:py-28 overflow-hidden" style="background: var(--color-secondary);">
+    <div class="absolute inset-0 grid-pattern-dark" aria-hidden="true"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at 60% 50%, rgba(37,99,235,0.1) 0%, transparent 50%);" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="section-label justify-center mb-4" style="color: var(--color-primary-light);">Our Services</p>
+      <h1 class="text-4xl sm:text-5xl font-bold mb-6" style="font-family: var(--font-family-display); color: var(--color-text-on-dark); letter-spacing: -0.025em;">
         IT Staffing & STEM Consulting
       </h1>
-      <p class="text-lg" style="color: var(--color-text-on-dark-muted);">
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-text-on-dark-muted);">
         Comprehensive staffing and consulting solutions to help your organization build, scale, and optimize technical teams.
       </p>
     </div>
   </section>
 
   <!-- SERVICES GRID -->
-  <section class="py-16 lg:py-24" style="background: var(--color-bg);">
+  <section class="py-16 lg:py-24 grid-pattern" style="background: var(--color-bg);">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((svc, i) => (
           <a
             href={`/services/${svc.data.slug}`}
-            class="group rounded-lg overflow-hidden transition-shadow duration-300 reveal"
-            style={`background: var(--color-surface); box-shadow: var(--shadow-card); transition-delay: ${i * 100}ms;`}
+            class="group relative rounded-xl overflow-hidden transition-all duration-400 reveal"
+            style={`background: var(--color-surface); border: 1px solid var(--color-border); transition-delay: ${i * 80}ms;`}
           >
+            <!-- Hover overlay -->
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 z-10 flex flex-col justify-end p-8" style="background: linear-gradient(180deg, rgba(15,23,42,0) 0%, rgba(15,23,42,0.92) 55%, rgba(15,23,42,0.98) 100%);">
+              <h2 class="text-xl font-bold mb-2 text-white" style="font-family: var(--font-family-display);">{svc.data.title}</h2>
+              <p class="text-sm leading-relaxed" style="color: var(--color-text-on-dark-muted);">{svc.data.shortDescription}</p>
+              <span class="inline-flex items-center gap-2 mt-4 text-sm font-semibold" style="color: var(--color-primary-light);">
+                Learn More
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
+              </span>
+            </div>
             <div class="aspect-[16/10] overflow-hidden">
               <img
                 src={svc.data.heroImage}
                 alt={svc.data.heroAlt}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 width="600"
                 height="375"
                 loading="lazy"
@@ -50,8 +63,11 @@ const services = allServices.sort((a, b) => a.data.order - b.data.order);
             <div class="p-6">
               <h2 class="text-xl font-bold mb-2" style="font-family: var(--font-family-display);">{svc.data.title}</h2>
               <p class="text-sm" style="color: var(--color-text-muted);">{svc.data.shortDescription}</p>
-              <span class="inline-block mt-4 text-sm font-semibold" style="color: var(--color-primary);">
-                Learn more &rarr;
+              <span class="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold" style="color: var(--color-primary);">
+                Learn more
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
               </span>
             </div>
           </a>
@@ -61,16 +77,17 @@ const services = allServices.sort((a, b) => a.data.order - b.data.order);
   </section>
 
   <!-- CTA -->
-  <section class="py-16 text-center" style={`background: var(--color-dark);`}>
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold mb-4" style="font-family: var(--font-family-display); color: var(--color-text-on-dark);">
+  <section class="relative py-20 text-center overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary) 60%, var(--color-dark) 100%);">
+    <div class="absolute inset-0 circuit-pattern opacity-40" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4 reveal" style="font-family: var(--font-family-display); color: var(--color-text-on-dark); letter-spacing: -0.02em;">
         Need Help Finding the Right Service?
       </h2>
-      <p class="mb-8" style="color: var(--color-text-on-dark-muted);">
+      <p class="mb-8 reveal" style="color: var(--color-text-on-dark-muted);">
         Contact us today and we will help you determine the best staffing solution for your organization.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={cta.primary.href} class="btn-primary">{cta.primary.label}</a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+        <a href={cta.primary.href} class="btn-primary">Connect With Our Team</a>
         <a href={`tel:${contact.phoneRaw}`} class="btn-ghost">{cta.phone.label}</a>
       </div>
     </div>
